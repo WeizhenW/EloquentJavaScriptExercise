@@ -105,3 +105,38 @@ console.log(prepend(10, prepend(20, null)));
 // → {value: 10, rest: {value: 20, rest: null}}
 console.log(nth(arrayToList([10, 20, 30]), 1));
 // → 20
+
+//deepEqual
+
+// Your code here.
+
+function deepEqual(obj1, obj2) {
+  if(typeof obj1 !== typeof obj2) {
+    return false;
+  } else if(obj1 === null || obj2 === null) {
+    return obj1 === obj2;
+  } else if(typeof obj1 === "string") {
+    return obj1 === obj2;
+  } else {
+    let key1 = Object.keys(obj1);
+    let key2 = Object.keys(obj2);
+    for(let i=0; i<key1.length; i++) {
+      let commonKey = key1[i];
+      if(key1[i] !== key2[i]) {
+        return false;
+      } else if(!deepEqual(obj1[commonKey], obj2[commonKey])) {
+        return false;
+      }
+    return true;
+    }
+  }
+}
+
+
+let obj = {here: {is: "an"}, object: 2};
+console.log(deepEqual(obj, obj));
+// → true
+console.log(deepEqual(obj, {here: 1, object: 2}));
+// → false
+console.log(deepEqual(obj, {here: {is: "an"}, object: 2}));
+// → true
