@@ -28,3 +28,20 @@ loop(3, n => n > 0, n => n - 1, console.log);
 // → 3
 // → 2
 // → 1
+
+//every method
+function every(array, test) {
+  let result = true;
+  for(let i=0; i<array.length; i++) {
+    result = result && test(array[i]);
+  }
+  return result;
+};
+
+function every(array, test) {
+  if(array.some(element => !test(element))) {
+    return false;
+  } else {
+    return true;
+  }
+}
